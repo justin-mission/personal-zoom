@@ -1,15 +1,9 @@
-// PASSWORD SECURITY CONFIGURATION
-const CORRECT_PASSCODE = "1234"; // Palitan mo 'to kung gusto mo ng ibang password!
+const CORRECT_PASSCODE = "1234";
 
-// State
 let userName = "";
 let localStream = null;
 let peer = null;
-let calls = {};
-let isMicOn = true;
-let isCamOn = true;
 
-// DOM Elements
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
 const usernameInput = document.getElementById('usernameInput');
@@ -36,14 +30,13 @@ const toggleChatBtn = document.getElementById('toggleChatBtn');
 const sidebar = document.getElementById('sidebar');
 const closeSidebar = document.getElementById('closeSidebar');
 
-// 1. LOGIN SYSTEM
+let isMicOn = true;
+let isCamOn = true;
+
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const enteredPasscode = passcodeInput.value.trim();
-  const name = usernameInput.value.trim();
-
-  if (enteredPasscode === CORRECT_PASSCODE) {
-    userName = name || "User";
+  if (passcodeInput.value.trim() === CORRECT_PASSCODE) {
+    userName = usernameInput.value.trim() || "User";
     displayName.textContent = userName;
     loginModal.classList.add('hidden');
     lobbyScreen.classList.remove('hidden');
@@ -53,7 +46,6 @@ loginForm.addEventListener('submit', (e) => {
   }
 });
 
-// 2. MEDIA INITIALIZATION
 async function initLocalMedia() {
   try {
     localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -65,7 +57,6 @@ async function initLocalMedia() {
   }
 }
 
-// 3. JOIN CALL & WEBRTC CONNECTION
 joinBtn.addEventListener('click', () => {
   const roomId = roomIdInput.value.trim() || "our-private-room-4";
 
@@ -76,16 +67,12 @@ joinBtn.addEventListener('click', () => {
 
   startClock();
 
-  // Initialize PeerJS
   peer = new Peer();
 
   peer.on('open', (id) => {
-    console.log('My Peer ID is: ' + id);
-    // Connect to room using standard naming for 4 people
-    connectToGroupRoom(roomId);
+    updateGrid();
   });
 
-  // Listen for incoming calls
   peer.on('call', (call) => {
     call.answer(localStream);
     const remoteVideoCard = createVideoCard(call.peer);
@@ -102,13 +89,6 @@ joinBtn.addEventListener('click', () => {
   });
 });
 
-function connectToGroupRoom(roomId) {
-  // Broadcast connection signal to existing members
-  // PeerJS connects directly via IDs
-  updateGrid();
-}
-
-// VIDEO GRID RESPONSIVENESS
 function createVideoCard(peerId) {
   const card = document.createElement('div');
   card.className = 'video-card';
@@ -130,7 +110,6 @@ function updateGrid() {
   else videoGrid.classList.add('grid-4');
 }
 
-// MEDIA CONTROLS
 micBtn.addEventListener('click', () => {
   isMicOn = !isMicOn;
   if (localStream) localStream.getAudioTracks()[0].enabled = isMicOn;
