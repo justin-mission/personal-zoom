@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Video Call</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- PeerJS Library para sa totoong Video Connection -->
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+
+  <!-- 1. LOGIN FORM MODAL -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-card">
+      <h1>🔒 Private Group Call</h1>
+      <p>Enter the group passcode to join (4 Users Only)</p>
+      
+      <form id="loginForm">
+        <div class="input-field">
+          <label for="usernameInput">Your Name</label>
+          <input type="text" id="usernameInput" placeholder="e.g. Juan" required autocomplete="off">
+        </div>
+        <div class="input-field">
+          <label for="passcodeInput">Passcode</label>
+          <input type="password" id="passcodeInput" placeholder="Enter password" required>
+        </div>
+        <p id="errorMsg" class="error-msg hidden">Wrong passcode! Try again.</p>
+        <button type="submit" class="btn primary-btn">Login & Enter Lobby</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. LOBBY SCREEN -->
+  <div id="lobbyScreen" class="lobby-container hidden">
+    <div class="lobby-card">
+      <h2>Welcome, <span id="displayName">User</span>!</h2>
+      <p>Check your camera & mic before joining</p>
+
+      <div class="preview-box">
+        <video id="previewVideo" autoplay playsinline muted></video>
+        <div id="previewFallback" class="video-fallback hidden">Camera Off</div>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="roomIdInput" value="our-private-room-4" placeholder="Room ID">
+        <button id="joinBtn" class="btn primary-btn">Join Call Now</button>
+      </div>
+
+      <div class="lobby-controls">
+        <button id="lobbyMicBtn" class="icon-btn active">🎤 Mic On</button>
+        <button id="lobbyCamBtn" class="icon-btn active">📹 Cam On</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MEETING ROOM SCREEN -->
+  <div id="meetingScreen" class="meeting-container hidden">
+    <header class="top-bar">
+      <div class="room-info">
+        <span class="dot live-dot"></span>
+        <span id="roomCodeDisplay">Room: our-private-room-4</span>
+      </div>
+      <div id="clock" class="clock">00:00:00</div>
+    </header>
+
+    <main class="main-content">
+      <section class="video-section">
+        <div id="videoGrid" class="video-grid grid-1">
+          <!-- Local Video Card -->
+          <div class="video-card" id="localCard">
+            <video id="localVideo" autoplay playsinline muted></video>
+            <div class="avatar hidden" id="localAvatar">U</div>
+            <div class="card-label">
+              <span id="localNameLabel">You</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar Chat -->
+      <aside id="sidebar" class="sidebar hidden">
+        <div class="sidebar-header">
+          <h3>Group Chat</h3>
+          <button id="closeSidebar" class="close-btn">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+          <div class="system-msg">Connected to room!</div>
+        </div>
+        <form id="chatForm" class="chat-input-area">
+          <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+          <button type="submit" class="btn primary-btn">Send</button>
+        </form>
+      </aside>
+    </main>
+
+    <!-- Bottom Controls -->
+    <footer class="bottom-bar">
+      <div class="controls-left">
+        <button id="micBtn" class="control-btn active">🎤 <span>Mic</span></button>
+        <button id="camBtn" class="control-btn active">📹 <span>Cam</span></button>
+      </div>
+      <div class="controls-center">
+        <button id="toggleChatBtn" class="control-btn">💬 <span>Chat</span></button>
+      </div>
+      <div class="controls-right">
+        <button id="leaveBtn" class="btn danger-btn">Leave</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
