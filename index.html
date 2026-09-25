@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group Video Call</title>
   <link rel="stylesheet" href="style.css">
-  <!-- PeerJS Library para sa totoong Video Connection -->
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 <body>
 
-  <!-- 1. LOGIN FORM MODAL -->
+  <!-- LOGIN FORM MODAL -->
   <div id="loginModal" class="modal-overlay">
     <div class="modal-card">
       <h1>🔒 Private Group Call</h1>
@@ -31,7 +30,7 @@
     </div>
   </div>
 
-  <!-- 2. LOBBY SCREEN -->
+  <!-- LOBBY SCREEN -->
   <div id="lobbyScreen" class="lobby-container hidden">
     <div class="lobby-card">
       <h2>Welcome, <span id="displayName">User</span>!</h2>
@@ -54,7 +53,7 @@
     </div>
   </div>
 
-  <!-- 3. MEETING ROOM SCREEN -->
+  <!-- MEETING ROOM SCREEN -->
   <div id="meetingScreen" class="meeting-container hidden">
     <header class="top-bar">
       <div class="room-info">
@@ -96,15 +95,22 @@
 
     <!-- Bottom Controls -->
     <footer class="bottom-bar">
-      <div class="controls-left">
-        <button id="micBtn" class="control-btn active">🎤 <span>Mic</span></button>
-        <button id="camBtn" class="control-btn active">📹 <span>Cam</span></button>
-      </div>
-      <div class="controls-center">
-        <button id="toggleChatBtn" class="control-btn">💬 <span>Chat</span></button>
-      </div>
-      <div class="controls-right">
-        <button id="leaveBtn" class="btn danger-btn">Leave</button>
+      <div class="controls-wrapper">
+        <button id="micBtn" class="control-btn active">
+          <span class="icon">🎤</span>
+          <span class="label">Mic</span>
+        </button>
+        <button id="camBtn" class="control-btn active">
+          <span class="icon">📹</span>
+          <span class="label">Cam</span>
+        </button>
+        <button id="toggleChatBtn" class="control-btn">
+          <span class="icon">💬</span>
+          <span class="label">Chat</span>
+        </button>
+        <button id="leaveBtn" class="btn danger-btn leave-btn">
+          <span>Leave</span>
+        </button>
       </div>
     </footer>
   </div>
