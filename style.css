@@ -9,6 +9,7 @@ body {
   background-color: #121212;
   color: #ffffff;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
@@ -25,26 +26,27 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 100;
+  padding: 15px;
 }
 
 .modal-card {
   background: #222;
-  padding: 30px;
+  padding: 25px 20px;
   border-radius: 16px;
   border: 3px solid #444;
-  width: 90%;
+  width: 100%;
   max-width: 380px;
   text-align: center;
 }
 
 .modal-card h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-bottom: 8px;
 }
 
 .modal-card p {
   color: #aaa;
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 20px;
 }
 
@@ -55,7 +57,7 @@ body {
 
 .input-field label {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 5px;
   color: #ddd;
 }
@@ -83,12 +85,11 @@ body {
 
 /* BUTTONS */
 .btn {
-  width: 100%;
   padding: 10px;
   border: 2px solid #fff;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -96,6 +97,7 @@ body {
   background: #2b7de9;
   border-color: #5ba2ff;
   color: #fff;
+  width: 100%;
 }
 
 .danger-btn {
@@ -110,21 +112,22 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 15px;
 }
 
 .lobby-card {
   background: #222;
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
   border: 2px solid #444;
   text-align: center;
-  width: 90%;
+  width: 100%;
   max-width: 420px;
 }
 
 .preview-box {
   width: 100%;
-  height: 220px;
+  height: 200px;
   background: #000;
   border-radius: 10px;
   margin: 15px 0;
@@ -152,7 +155,8 @@ body {
 
 .input-group {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
@@ -169,6 +173,7 @@ body {
   background: #333;
   color: #fff;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .icon-btn.active {
@@ -180,22 +185,24 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
 }
 
 .top-bar {
-  height: 50px;
+  height: 45px;
   background: #1f1f1f;
   border-bottom: 2px solid #333;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 12px;
+  font-size: 0.85rem;
 }
 
 .live-dot {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background-color: #00ff66;
   border-radius: 50%;
   margin-right: 6px;
@@ -204,29 +211,29 @@ body {
 .main-content {
   flex: 1;
   display: flex;
+  position: relative;
   overflow: hidden;
 }
 
 .video-section {
   flex: 1;
-  padding: 15px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 /* VIDEO GRID FOR 4 PEOPLE */
 .video-grid {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
   height: 100%;
-  max-width: 1000px;
-  max-height: 700px;
 }
 
 .grid-1 { grid-template-columns: 1fr; }
-.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-2 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
 .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
 
 .video-card {
@@ -251,12 +258,12 @@ body {
 }
 
 .avatar {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: #2b7de9;
   color: white;
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -265,21 +272,25 @@ body {
 
 .card-label {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 8px;
+  left: 8px;
   background: rgba(0, 0, 0, 0.7);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
-/* SIDEBAR */
+/* SIDEBAR CHAT (OVERLAY SA MOBILE) */
 .sidebar {
-  width: 280px;
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 100%;
+  max-width: 320px;
   background: #222;
   border-left: 2px solid #333;
   display: flex;
   flex-direction: column;
+  z-index: 50;
 }
 
 .sidebar-header {
@@ -318,6 +329,7 @@ body {
   padding: 6px 10px;
   border-radius: 8px;
   max-width: 85%;
+  font-size: 0.9rem;
 }
 
 .chat-msg.mine {
@@ -332,34 +344,72 @@ body {
   border-top: 2px solid #333;
 }
 
-/* BOTTOM BAR */
+.chat-input-area input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #111;
+  color: #fff;
+}
+
+/* BOTTOM BAR RESPONSIVE CONTROLS */
 .bottom-bar {
-  height: 65px;
+  height: 70px;
   background: #181818;
   border-top: 2px solid #333;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
-.controls-left, .controls-center {
+.controls-wrapper {
   display: flex;
-  gap: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  gap: 8px;
 }
 
 .control-btn {
   background: #2c2c2c;
   border: 2px solid #444;
   color: #fff;
-  padding: 6px 12px;
-  border-radius: 8px;
+  flex: 1;
+  max-width: 70px;
+  height: 52px;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.control-btn .icon {
+  font-size: 1.1rem;
+}
+
+.control-btn .label {
+  font-size: 0.75rem;
+  margin-top: 2px;
 }
 
 .control-btn.off {
   background: #d93025;
+  border-color: #ff6b60;
+}
+
+.leave-btn {
+  flex: 1.2;
+  max-width: 90px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  border-radius: 10px;
 }
